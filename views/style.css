@@ -1,0 +1,57 @@
+html, body, #main {
+    height: 100%;
+    margin: 0;
+    background: #282C34;
+}
+
+#main {
+    display: flex;
+}
+
+#main-area {
+    padding: 15px;
+    box-sizing: border-box;
+    height: 100%;
+    flex: 1;
+}
+
+#app-area {
+    border: 2px solid #282C34;
+    height: calc(100% - 55px);
+    min-width: 700px;
+    min-height: 600px;
+}
+
+#sidebar {
+    padding: 15px;
+    background: #21242B;
+    flex-basis: 20%;
+    min-width: 200px;
+    max-width: 300px;
+    border-right: 2px solid #2F333D;
+}
+
+#sidebar-list {
+    word-break: break-all;
+    padding-inline-start: 30px;
+    color: white;
+}
+
+#app-area > h1 {
+    opacity: 0;
+}
+
+#controls-area {
+    height: 50px;
+    position: relative;
+}
+
+.resizeHandle {
+    width: 8px;
+    border: 1px solid #2F333D;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    cursor: col-resize;
+}

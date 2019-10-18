@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Viewtron</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="../dist/renderer.js"></script>
+  </head>
+  <body>
+    <main id="main">
+      <section id="sidebar">
+        <ul id="sidebar-list"></ul>
+        <form id="add-app-form">
+          <input id="add-app-input" type="text" name="name">
+          <button>Add</button>
+        </form>
+        <button id="reset-views">Reset views</button>
+      </section>
+      <section id="main-area">
+        <section id="controls-area">
+          <div id="resizers">
+            <div class="resizeHandle" draggable="true" data-view-id="foo"></div>
+          </div>
+        </section>
+        <section id="app-area">
+          <!-- needed for resize detection -->
+          <h1>FOOOOOOOO</h1>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
