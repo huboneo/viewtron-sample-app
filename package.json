@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "css-element-queries": "^1.2.1",
-    "viewtron": "^1.2.0"
+    "viewtron": "^1.2.1"
   }
 }

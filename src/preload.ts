@@ -12,6 +12,7 @@ import {
     viewResetHandler,
     viewsUpdatedHandler,
     viewtronAreaResizeHandler,
+    rowResizeHandler,
 } from "viewtron/dist/ipc-renderer";
 
 // All of the Node.js APIs are available in the preload process.
@@ -117,7 +118,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const {dataset: {viewId, columnId, rowId}} = event.target;
 
         if (viewId) {
-            removeViewHandler(viewId);
+            removeViewHandler({viewId});
         }
 
         if (columnId) {
@@ -167,7 +168,9 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // @ts-ignore
-    window.foo = columnResizeHandler;
+    window.columnResize = columnResizeHandler;
+    // @ts-ignore
+    window.rowResize = rowResizeHandler;
 
     document.getElementById("controls-area").addEventListener("drag", (event: any) => {
         if (event.target.className !== "resizeHandle") {
