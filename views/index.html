@@ -9,17 +9,34 @@
   <body>
     <main id="main">
       <section id="sidebar">
-        <ul id="sidebar-list"></ul>
-        <form id="add-app-form">
-          <input id="add-app-input" type="text" name="name">
+        <p>
+          Views live in columns, columns live in rows. Always add a row and a column before you add a view.
+        </p>
+        <button id="add-row">Add Row</button>
+        <hr/>
+        <h3>Active views</h3>
+        <ul id="sidebar-list">
+
+        </ul>
+        <hr/>
+        <h3>Add columns to a row</h3>
+        <form id="add-column-form">
+          <input id="add-app-column-row-id-input" placeholder="rowId" required type="text" name="rowId">
           <button>Add</button>
         </form>
+        <hr/>
+        <h3>Add views to a column</h3>
+        <form id="add-app-form">
+          <input id="add-app-url-input" placeholder="url" required type="text" name="url">
+          <input id="add-app-column-id-input" placeholder="columnId" required type="text" name="columnId">
+          <button>Add</button>
+        </form>
+        <hr/>
         <button id="reset-views">Reset views</button>
       </section>
       <section id="main-area">
         <section id="controls-area">
           <div id="resizers">
-            <div class="resizeHandle" draggable="true" data-view-id="foo"></div>
           </div>
         </section>
         <section id="app-area">

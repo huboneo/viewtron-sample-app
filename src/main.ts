@@ -2,8 +2,8 @@ import {app, BrowserWindow} from "electron";
 import * as path from "path";
 
 import {
-    addViewInstanceHandlers,
     addMainWindowHandlers,
+    addViewInstanceHandlers,
     addViewtronAreaHandlers,
 } from 'viewtron/dist/ipc-main';
 
