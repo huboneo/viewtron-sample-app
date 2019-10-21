@@ -4,15 +4,17 @@ import {
     addColumnHandler,
     addRowHandler,
     addViewHandler,
+    columnResetHandler,
     columnResizeHandler,
-    initHandler,
+    viewtronInitHandler,
     removeColumnHandler,
     removeRowHandler,
     removeViewHandler,
-    viewResetHandler,
-    viewsUpdatedHandler,
-    viewtronAreaResizeHandler,
+    rowResetHandler,
     rowResizeHandler,
+    viewResetHandler,
+    viewtronResizeHandler,
+    viewtronUpdateHandler,
 } from "viewtron/dist/ipc-renderer";
 
 // All of the Node.js APIs are available in the preload process.
@@ -32,82 +34,46 @@ window.addEventListener("DOMContentLoaded", () => {
     const appArea = document.getElementById("app-area");
 
     requestAnimationFrame(() => {
-        initHandler(appArea);
+        // @ts-ignore
+        viewtronInitHandler(appArea.getBoundingClientRect().toJSON());
     });
-    // @ts-ignore
-    new ResizeSensor(appArea, () => viewtronAreaResizeHandler(appArea.getBoundingClientRect().toJSON()));
 
-    let lastViewUpdate: any[] = [];
+    // @ts-ignore
+    new ResizeSensor(appArea, () => viewtronResizeHandler(appArea.getBoundingClientRect().toJSON()));
+
     // @ts-ignore
     window.currentViews = [];
-    viewsUpdatedHandler(({views, rows, columns}: ViewtronUpdateData) => {
-        const isViewChange = views.length !== lastViewUpdate.length;
-
-        lastViewUpdate = views;
+    viewtronUpdateHandler(({views, rows, columns}: ViewtronUpdateData) => {
         // @ts-ignore
         window.currentViews = views;
 
         document.getElementById("sidebar-list").innerHTML = `
             ${rows.map(({id}) => {
-            const rowColumns = columns.filter(({rowId}) => rowId === id);
-
-            return `
-                <li>
-                    Row ${id} <button data-row-id="${id}">-</button>
-                    <ul>
-                        ${rowColumns.map((column) => {
-                const colViews = views.filter((view) => view.columnId === column.id);
+                const rowColumns = columns.filter(({rowId}) => rowId === id);
 
                 return `
-                                <li>
-                                    Column ${column.id} <button data-column-id="${column.id}">-</button>
-                                    <ul>
-                                        ${colViews.map(({id: viewId, url}) => `
-                                            <li>${url} <button data-view-id="${viewId}">-</button></li>
-                                        `).join("")}
-                                    </ul>
-                                </li>
-                            `;
+                    <li>
+                        Row ${id} <button data-row-id="${id}">-</button>
+                        <ul>
+                            ${rowColumns.map((column) => {
+                                const colViews = views.filter((view) => view.columnId === column.id);
+
+                                return `
+                                    <li>
+                                        Column ${column.id} <button data-column-id="${column.id}">-</button>
+                                        <ul>
+                                            ${colViews.map(({id: viewId, url}) => `
+                                                <li>${url} <button data-view-id="${viewId}">-</button></li>
+                                            `).join("")}
+                                        </ul>
+                                    </li>
+                                `;
+                            }).join("")}
+                        </ul>
+                    </li>
+                `;
             }).join("")}
-                    </ul>
-                </li>
-            `;
-        }).join("")}
         `;
-
-        if (!isViewChange) {
-            let added = 0;
-            Array.from(document.getElementsByClassName("resizeHandle")).forEach((el) => {
-                // @ts-ignore
-                const {viewId} = el.dataset;
-                const view = lastViewUpdate.find(({id}) => viewId === id);
-
-                if (!view) {
-                    return;
-                }
-
-                const left: number = added + view.rect.width + 5;
-                added = left;
-
-                // @ts-ignore
-                el.style.left = `${left}px`;
-            });
-
-            return;
-        }
-
-        let added = 0;
-        document.getElementById("resizers").innerHTML = `
-            ${views.map(({id, rect}) => {
-            const left: number = added + rect.width + 5;
-            added = left;
-
-            return `
-                        <div class="resizeHandle" draggable="true" data-view-id="${id}" style="left: ${left}px;"></div>
-                    `;
-        }).join("")}
-        `;
-
     });
 
     document.getElementById("sidebar-list").addEventListener("click", (event: any) => {
@@ -142,9 +108,40 @@ window.addEventListener("DOMContentLoaded", () => {
         addViewHandler({url, columnId});
 
         // @ts-ignore
-        document.getElementById("add-app-url-input").value = "";
+        document.getElementById("add-app-form-url-input").value = "";
         // @ts-ignore
-        document.getElementById("add-app-column-id-input").value = "";
+        document.getElementById("add-app-form-column-id-input").value = "";
+    }, false);
+
+    document.getElementById("row-height-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const rowId = data.get("rowId") as string;
+        const height = Number(data.get("height"));
+
+        rowResizeHandler({rowId, height});
+
+        // @ts-ignore
+        document.getElementById("row-height-form-row-id-input").value = "";
+        // @ts-ignore
+        document.getElementById("row-height-form-row-height-input").value = "";
+    }, false);
+
+
+    document.getElementById("column-width-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const columnId = data.get("columnId") as string;
+        const width = Number(data.get("width"));
+
+        columnResizeHandler({columnId, width});
+
+        // @ts-ignore
+        document.getElementById("column-width-form-column-id-input").value = "";
+        // @ts-ignore
+        document.getElementById("column-width-form-column-width-input").value = "";
     }, false);
 
     document.getElementById("add-column-form").addEventListener("submit", (event: any) => {
@@ -156,45 +153,16 @@ window.addEventListener("DOMContentLoaded", () => {
         addColumnHandler({rowId});
 
         // @ts-ignore
-        document.getElementById("add-app-column-row-id-input").value = "";
+        document.getElementById("add-column-form-row-id-input").value = "";
     }, false);
 
     document.getElementById("reset-views").addEventListener("click", () => {
+        rowResetHandler({});
+        columnResetHandler({});
         viewResetHandler({});
     });
 
     document.getElementById("add-row").addEventListener("click", () => {
         addRowHandler({});
-    });
-
-    // @ts-ignore
-    window.columnResize = columnResizeHandler;
-    // @ts-ignore
-    window.rowResize = rowResizeHandler;
-
-    document.getElementById("controls-area").addEventListener("drag", (event: any) => {
-        if (event.target.className !== "resizeHandle") {
-            return;
-        }
-
-        const {clientX} = event;
-        const {dataset: {viewId} = {viewId: ""}} = event.target;
-        const view = lastViewUpdate.find(({id}) => id === viewId);
-
-        if (!view) {
-            return;
-        }
-
-        // @todo: this should not be bound to a view
-        const {columnId, rect} = view;
-
-        // just some arbitrary min-width
-        const newWidth = clientX - rect.x;
-
-        if (newWidth <= 50) {
-            return;
-        }
-
-        columnResizeHandler({columnId, width: newWidth});
     });
 });

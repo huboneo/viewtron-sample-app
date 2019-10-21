@@ -21,18 +21,32 @@
         <hr/>
         <h3>Add columns to a row</h3>
         <form id="add-column-form">
-          <input id="add-app-column-row-id-input" placeholder="rowId" required type="text" name="rowId">
+          <input id="add-column-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
           <button>Add</button>
         </form>
         <hr/>
         <h3>Add views to a column</h3>
         <form id="add-app-form">
-          <input id="add-app-url-input" placeholder="url" required type="text" name="url">
-          <input id="add-app-column-id-input" placeholder="columnId" required type="text" name="columnId">
+          <input id="add-app-form-url-input" placeholder="url" required type="text" name="url">
+          <input id="add-app-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
           <button>Add</button>
         </form>
         <hr/>
-        <button id="reset-views">Reset views</button>
+        <h3>Set row height</h3>
+        <form id="row-height-form">
+          <input id="row-height-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
+          <input id="row-height-form-row-height-input" placeholder="height" required type="number" name="height">
+          <button>Set</button>
+        </form>
+        <hr/>
+        <h3>Set column width</h3>
+        <form id="column-width-form">
+          <input id="column-width-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
+          <input id="column-width-form-column-width-input" placeholder="width" required type="number" name="width">
+          <button>Set</button>
+        </form>
+        <hr/>
+        <button id="reset-views">Reset layout</button>
       </section>
       <section id="main-area">
         <section id="controls-area">

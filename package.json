@@ -1,31 +1,31 @@
 {
-  "name": "electron-quick-start-typescript",
+  "name": "viewtron-sample-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application written with Typescript",
+  "description": "",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "npm run build && electron ./dist/main.js"
   },
-  "repository": "https://github.com/electron/electron-quick-start-typescript",
+  "repository": "https://github.com/huboneo/viewtron-sample-app",
   "keywords": [
-    "Electron",
+    "Viewtron",
     "quick",
     "start",
     "tutorial",
     "demo",
     "typescript"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "huboneo",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^6.0.8",
     "tslint": "^5.19.0",
-    "typescript": "^3.6.0"
+    "typescript": "^3.6.0",
+    "viewtron": "^1.2.2"
   },
   "dependencies": {
-    "css-element-queries": "^1.2.1",
-    "viewtron": "^1.2.1"
+    "css-element-queries": "^1.2.1"
   }
 }
