@@ -2,9 +2,7 @@ import {app, BrowserWindow} from "electron";
 import * as path from "path";
 
 import {
-    addMainWindowHandlers,
-    addViewInstanceHandlers,
-    addViewtronAreaHandlers,
+    addViewtron
 } from 'viewtron/dist/ipc-main';
 
 let mainWindow: Electron.BrowserWindow;
@@ -34,9 +32,7 @@ function createWindow() {
     });
 
     // viewtron
-    addMainWindowHandlers(mainWindow);
-    addViewtronAreaHandlers();
-    addViewInstanceHandlers();
+    addViewtron(mainWindow);
 }
 
 // This method will be called when Electron has finished
