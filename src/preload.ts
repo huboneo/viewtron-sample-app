@@ -15,6 +15,7 @@ import {
     viewResetHandler,
     viewtronResizeHandler,
     viewtronUpdateHandler,
+    viewResizeHandler,
 } from "viewtron/dist/ipc-renderer";
 
 // All of the Node.js APIs are available in the preload process.
@@ -53,17 +54,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 return `
                     <li>
-                        Row ${id} <button data-row-id="${id}">-</button>
+                        Row (${id}) <button data-row-id="${id}">-</button>
                         <ul>
                             ${rowColumns.map((column) => {
                                 const colViews = views.filter((view) => view.columnId === column.id);
 
                                 return `
                                     <li>
-                                        Column ${column.id} <button data-column-id="${column.id}">-</button>
+                                        Column (${column.id}) <button data-column-id="${column.id}">-</button>
                                         <ul>
                                             ${colViews.map(({id: viewId, url}) => `
-                                                <li>${url} <button data-view-id="${viewId}">-</button></li>
+                                                <li>${url} (${viewId}) <button data-view-id="${viewId}">-</button></li>
                                             `).join("")}
                                         </ul>
                                     </li>
@@ -98,7 +99,23 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    document.getElementById("add-app-form").addEventListener("submit", (event: any) => {
+    document.getElementById("add-row").addEventListener("click", () => {
+        addRowHandler({});
+    });
+
+    document.getElementById("add-column-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const rowId = String(data.get("rowId"));
+
+        addColumnHandler({rowId});
+
+        // @ts-ignore
+        document.getElementById("add-column-form-row-id-input").value = "";
+    }, false);
+
+    document.getElementById("add-view-form").addEventListener("submit", (event: any) => {
         event.preventDefault();
 
         const data = new FormData(event.target);
@@ -108,9 +125,9 @@ window.addEventListener("DOMContentLoaded", () => {
         addViewHandler({url, columnId});
 
         // @ts-ignore
-        document.getElementById("add-app-form-url-input").value = "";
+        document.getElementById("add-view-form-url-input").value = "";
         // @ts-ignore
-        document.getElementById("add-app-form-column-id-input").value = "";
+        document.getElementById("add-view-form-column-id-input").value = "";
     }, false);
 
     document.getElementById("row-height-form").addEventListener("submit", (event: any) => {
@@ -128,7 +145,6 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("row-height-form-row-height-input").value = "";
     }, false);
 
-
     document.getElementById("column-width-form").addEventListener("submit", (event: any) => {
         event.preventDefault();
 
@@ -144,25 +160,24 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("column-width-form-column-width-input").value = "";
     }, false);
 
-    document.getElementById("add-column-form").addEventListener("submit", (event: any) => {
+    document.getElementById("view-height-form").addEventListener("submit", (event: any) => {
         event.preventDefault();
 
         const data = new FormData(event.target);
-        const rowId = String(data.get("rowId"));
+        const viewId = data.get("viewId") as string;
+        const height = Number(data.get("height"));
 
-        addColumnHandler({rowId});
+        viewResizeHandler({viewId, height});
 
         // @ts-ignore
-        document.getElementById("add-column-form-row-id-input").value = "";
+        document.getElementById("view-height-form-view-id-input").value = "";
+        // @ts-ignore
+        document.getElementById("view-height-form-view-height-input").value = "";
     }, false);
 
     document.getElementById("reset-views").addEventListener("click", () => {
         rowResetHandler({});
         columnResetHandler({});
         viewResetHandler({});
-    });
-
-    document.getElementById("add-row").addEventListener("click", () => {
-        addRowHandler({});
     });
 });

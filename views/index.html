@@ -14,7 +14,7 @@
         </p>
         <button id="add-row">Add Row</button>
         <hr/>
-        <h3>Active views</h3>
+        <h3>Active layout</h3>
         <ul id="sidebar-list">
 
         </ul>
@@ -26,9 +26,9 @@
         </form>
         <hr/>
         <h3>Add views to a column</h3>
-        <form id="add-app-form">
-          <input id="add-app-form-url-input" placeholder="url" required type="text" name="url">
-          <input id="add-app-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
+        <form id="add-view-form">
+          <input id="add-view-form-url-input" placeholder="url" required type="text" name="url">
+          <input id="add-view-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
           <button>Add</button>
         </form>
         <hr/>
@@ -46,13 +46,16 @@
           <button>Set</button>
         </form>
         <hr/>
+        <h3>Set view height</h3>
+        <form id="view-height-form">
+          <input id="view-height-form-view-id-input" placeholder="viewId" required type="text" name="viewId">
+          <input id="view-height-form-view-height-input" placeholder="height" required type="number" name="height">
+          <button>Set</button>
+        </form>
+        <hr/>
         <button id="reset-views">Reset layout</button>
       </section>
       <section id="main-area">
-        <section id="controls-area">
-          <div id="resizers">
-          </div>
-        </section>
         <section id="app-area">
           <!-- needed for resize detection -->
           <h1>FOOOOOOOO</h1>

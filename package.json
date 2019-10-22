@@ -23,7 +23,7 @@
     "electron": "^6.0.8",
     "tslint": "^5.19.0",
     "typescript": "^3.6.0",
-    "viewtron": "^1.2.3"
+    "viewtron": "^1.2.4"
   },
   "dependencies": {
     "css-element-queries": "^1.2.1"

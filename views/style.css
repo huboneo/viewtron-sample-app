@@ -17,7 +17,7 @@ html, body, #main {
 
 #app-area {
     border: 2px solid #282C34;
-    height: calc(100% - 55px);
+    height: calc(100% - 5px);
     min-width: 700px;
     min-height: 600px;
 }
