@@ -6,16 +6,19 @@ import {
     addViewHandler,
     columnResetHandler,
     columnResizeHandler,
+    columnVisibilityHandler,
     viewtronInitHandler,
     removeColumnHandler,
     removeRowHandler,
     removeViewHandler,
     rowResetHandler,
     rowResizeHandler,
+    rowVisibilityHandler,
     viewResetHandler,
     viewtronResizeHandler,
     viewtronUpdateHandler,
     viewResizeHandler,
+    viewVisibilityHandler
 } from "viewtron/dist/ipc-renderer";
 
 // All of the Node.js APIs are available in the preload process.
@@ -173,6 +176,45 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("view-height-form-view-id-input").value = "";
         // @ts-ignore
         document.getElementById("view-height-form-view-height-input").value = "";
+    }, false);
+
+    document.getElementById("row-visibility-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const rowId = data.get("rowId") as string;
+        const visible = data.get("visibility") === 'visible';
+
+        rowVisibilityHandler({rowId, visible});
+
+        // @ts-ignore
+        document.getElementById("row-visibility-form-row-id-input").value = "";
+    }, false);
+
+    document.getElementById("column-visibility-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const columnId = data.get("columnId") as string;
+        const visible = data.get("visibility") === 'visible';
+
+        columnVisibilityHandler({columnId, visible});
+
+        // @ts-ignore
+        document.getElementById("column-visibility-form-column-id-input").value = "";
+    }, false);
+
+    document.getElementById("view-visibility-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const viewId = data.get("viewId") as string;
+        const visible = data.get("visibility") === 'visible';
+
+        viewVisibilityHandler({viewId, visible});
+
+        // @ts-ignore
+        document.getElementById("view-visibility-form-view-id-input").value = "";
     }, false);
 
     document.getElementById("reset-views").addEventListener("click", () => {
