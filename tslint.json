@@ -1,22 +1,26 @@
 {
-  "extends": "tslint:recommended",
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-microsoft-contrib"
+  ],
+  "jsRules": {},
   "rules": {
-    "max-line-length": {
-      "options": [
-        120
-      ]
-    },
-    "new-parens": true,
-    "no-arg": true,
-    "no-bitwise": true,
-    "no-conditional-assignment": true,
-    "no-consecutive-blank-lines": false
-  },
-  "jsRules": {
-    "max-line-length": {
-      "options": [
-        120
-      ]
-    }
+    "align": [true, "statements", "members", "elements"],
+    "export-name": [
+      true,
+      {
+        "ignore-case": true
+      }
+    ],
+    "max-line-length": [true, 80],
+    "no-any": false,
+    "no-submodule-imports": false,
+    "no-import-side-effect": [
+      true,
+      {
+        "ignore-module": "(\\.css)$"
+      }
+    ]
   }
 }

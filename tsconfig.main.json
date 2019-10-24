@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "jsx": "react",
     "noImplicitAny": true,
     "lib": ["dom"],
     "sourceMap": true,
-    "outDir": "dist/ui",
+    "outDir": "dist/main",
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
@@ -14,6 +13,6 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "src/ui/**/*"
+    "src/main/**/*"
   ]
 }
