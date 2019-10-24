@@ -11,6 +11,9 @@ import {
     removeColumnHandler,
     removeRowHandler,
     removeViewHandler,
+    reorderColumnHandler,
+    reorderRowHandler,
+    reorderViewHandler,
     rowResetHandler,
     rowResizeHandler,
     rowVisibilityHandler,
@@ -57,17 +60,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 return `
                     <li>
-                        Row (${id}) <button data-row-id="${id}">-</button>
+                        Row (<span class="value">${id}</span>) <button data-row-id="${id}">-</button>
                         <ul>
                             ${rowColumns.map((column) => {
                                 const colViews = views.filter((view) => view.columnId === column.id);
 
                                 return `
                                     <li>
-                                        Column (${column.id}) <button data-column-id="${column.id}">-</button>
+                                        Column (<span class="value">${column.id}</span>) <button data-column-id="${column.id}">-</button>
                                         <ul>
                                             ${colViews.map(({id: viewId, url}) => `
-                                                <li>${url} (${viewId}) <button data-view-id="${viewId}">-</button></li>
+                                                <li><span class="value">${url}</span> (<span class="value">${viewId}</span>) <button data-view-id="${viewId}">-</button></li>
                                             `).join("")}
                                         </ul>
                                     </li>
@@ -178,6 +181,8 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("view-height-form-view-height-input").value = "";
     }, false);
 
+    // @ts-ignore
+    document.querySelector('#row-visibility-form .default').checked = 'checked';
     document.getElementById("row-visibility-form").addEventListener("submit", (event: any) => {
         event.preventDefault();
 
@@ -189,8 +194,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // @ts-ignore
         document.getElementById("row-visibility-form-row-id-input").value = "";
+        // @ts-ignore
+        document.querySelector('#row-visibility-form .default').checked = 'checked';
     }, false);
 
+    // @ts-ignore
+    document.querySelector('#column-visibility-form .default').checked = 'checked';
     document.getElementById("column-visibility-form").addEventListener("submit", (event: any) => {
         event.preventDefault();
 
@@ -202,8 +211,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // @ts-ignore
         document.getElementById("column-visibility-form-column-id-input").value = "";
+        // @ts-ignore
+        document.querySelector('#column-visibility-form .default').checked = 'checked';
     }, false);
 
+    // @ts-ignore
+    document.querySelector('#view-visibility-form .default').checked = 'checked';
     document.getElementById("view-visibility-form").addEventListener("submit", (event: any) => {
         event.preventDefault();
 
@@ -215,6 +228,53 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // @ts-ignore
         document.getElementById("view-visibility-form-view-id-input").value = "";
+        // @ts-ignore
+        document.querySelector('#view-visibility-form .default').checked = 'checked';
+    }, false);
+
+    document.getElementById("row-move-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const rowId = data.get("rowId") as string;
+        const newIndex = Number(data.get("newIndex"));
+
+        reorderRowHandler({rowId, newIndex});
+
+        // @ts-ignore
+        document.getElementById("row-move-form-row-id-input").value = "";
+        // @ts-ignore
+        document.getElementById("row-move-form-row-new-index-input").value = "";
+    }, false);
+
+    document.getElementById("column-move-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const columnId = data.get("columnId") as string;
+        const newIndex = Number(data.get("newIndex"));
+
+        reorderColumnHandler({columnId, newIndex});
+
+        // @ts-ignore
+        document.getElementById("column-move-form-column-id-input").value = "";
+        // @ts-ignore
+        document.getElementById("column-move-form-column-new-index-input").value = "";
+    }, false);
+
+    document.getElementById("view-move-form").addEventListener("submit", (event: any) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+        const viewId = data.get("viewId") as string;
+        const newIndex = Number(data.get("newIndex"));
+
+        reorderViewHandler({viewId, newIndex});
+
+        // @ts-ignore
+        document.getElementById("view-move-form-view-id-input").value = "";
+        // @ts-ignore
+        document.getElementById("view-move-form-view-new-index-input").value = "";
     }, false);
 
     document.getElementById("reset-views").addEventListener("click", () => {

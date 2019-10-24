@@ -56,3 +56,7 @@ html, body, #main {
     left: 50%;
     cursor: col-resize;
 }
+
+.value {
+    user-select: all;
+}
