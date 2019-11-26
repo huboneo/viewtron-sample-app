@@ -13,87 +13,89 @@
         <p>
           Views live in columns, columns live in rows. Always add a row and a column before you add a view.
         </p>
-        <ul id="sidebar-list">
+        <div id="sidebar-content">
+          <ul id="sidebar-list">
 
-        </ul>
-        <hr/>
-        <h2>Create Layout</h2>
-        <button id="add-row">Add Row</button>
-        <h3>Add column to a row</h3>
-        <form id="add-column-form">
-          <input id="add-column-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
-          <button>Add</button>
-        </form>
-        <h3>Add view to a column</h3>
-        <form id="add-view-form">
-          <input id="add-view-form-url-input" placeholder="url" required type="text" name="url">
-          <input id="add-view-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
-          <button>Add</button>
-        </form>
-        <hr/>
-        <h2>Set dimensions</h2>
-        <h3>Row height</h3>
-        <form id="row-height-form">
-          <input id="row-height-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
-          <input id="row-height-form-row-height-input" placeholder="height" required type="number" name="height">
-          <button>Set</button>
-        </form>
-        <h3>Column width</h3>
-        <form id="column-width-form">
-          <input id="column-width-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
-          <input id="column-width-form-column-width-input" placeholder="width" required type="number" name="width">
-          <button>Set</button>
-        </form>
-        <h3>View height</h3>
-        <form id="view-height-form">
-          <input id="view-height-form-view-id-input" placeholder="viewId" required type="text" name="viewId">
-          <input id="view-height-form-view-height-input" placeholder="height" required type="number" name="height">
-          <button>Set</button>
-        </form>
-        <button id="reset-views">Reset all dimensions</button>
-        <hr/>
-        <h2>Show/hide</h2>
-        <h3>Row visibility</h3>
-        <form id="row-visibility-form">
-          <input id="row-visibility-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
-          <input placeholder="visibility" required class="default" type="radio" value="visible" name="visibility"> Visible
-          <input placeholder="visibility" required type="radio" value="hidden" name="visibility"> Hidden
-          <button>Set</button>
-        </form>
-        <h3>Column visibility</h3>
-        <form id="column-visibility-form">
-          <input id="column-visibility-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
-          <input placeholder="visibility" required class="default" type="radio" value="visible" name="visibility"> Visible
-          <input placeholder="visibility" required type="radio" value="hidden" name="visibility"> Hidden
-          <button>Set</button>
-        </form>
-        <h3>View visibility</h3>
-        <form id="view-visibility-form">
-          <input id="view-visibility-form-view-id-input" placeholder="viewId" required type="text" name="viewId">
-          <input placeholder="visibility" required class="default" type="radio" value="visible" name="visibility"> Visible
-          <input placeholder="visibility" required type="radio" value="hidden" name="visibility"> Hidden
-          <button>Set</button>
-        </form>
-        <hr/>
-        <h2>Reorder</h2>
-        <h3>Row</h3>
-        <form id="row-move-form">
-          <input id="row-move-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
-          <input id="row-move-form-row-new-index-input" placeholder="newIndex" required type="number" name="newIndex">
-          <button>Move</button>
-        </form>
-        <h3>Column (in a row)</h3>
-        <form id="column-move-form">
-          <input id="column-move-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
-          <input id="column-move-form-column-new-index-input" placeholder="newIndex" required type="number" name="newIndex">
-          <button>Move</button>
-        </form>
-        <h3>View (in a column)</h3>
-        <form id="view-move-form">
-          <input id="view-move-form-view-id-input" placeholder="viewId" required type="text" name="viewId">
-          <input id="view-move-form-view-new-index-input" placeholder="newIndex" required type="number" name="newIndex">
-          <button>Move</button>
-        </form>
+          </ul>
+          <hr/>
+          <h2>Create Layout</h2>
+          <button id="add-row">Add Row</button>
+          <h3>Add column to a row</h3>
+          <form id="add-column-form">
+            <input id="add-column-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
+            <button>Add</button>
+          </form>
+          <h3>Add view to a column</h3>
+          <form id="add-view-form">
+            <input id="add-view-form-url-input" placeholder="url" required type="text" name="url">
+            <input id="add-view-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
+            <button>Add</button>
+          </form>
+          <hr/>
+          <h2>Set dimensions</h2>
+          <h3>Row height</h3>
+          <form id="row-height-form">
+            <input id="row-height-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
+            <input id="row-height-form-row-height-input" placeholder="height" required type="number" name="height">
+            <button>Set</button>
+          </form>
+          <h3>Column width</h3>
+          <form id="column-width-form">
+            <input id="column-width-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
+            <input id="column-width-form-column-width-input" placeholder="width" required type="number" name="width">
+            <button>Set</button>
+          </form>
+          <h3>View height</h3>
+          <form id="view-height-form">
+            <input id="view-height-form-view-id-input" placeholder="viewId" required type="text" name="viewId">
+            <input id="view-height-form-view-height-input" placeholder="height" required type="number" name="height">
+            <button>Set</button>
+          </form>
+          <button id="reset-views">Reset all dimensions</button>
+          <hr/>
+          <h2>Show/hide</h2>
+          <h3>Row visibility</h3>
+          <form id="row-visibility-form">
+            <input id="row-visibility-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
+            <input placeholder="visibility" required class="default" type="radio" value="visible" name="visibility"> Visible
+            <input placeholder="visibility" required type="radio" value="hidden" name="visibility"> Hidden
+            <button>Set</button>
+          </form>
+          <h3>Column visibility</h3>
+          <form id="column-visibility-form">
+            <input id="column-visibility-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
+            <input placeholder="visibility" required class="default" type="radio" value="visible" name="visibility"> Visible
+            <input placeholder="visibility" required type="radio" value="hidden" name="visibility"> Hidden
+            <button>Set</button>
+          </form>
+          <h3>View visibility</h3>
+          <form id="view-visibility-form">
+            <input id="view-visibility-form-view-id-input" placeholder="viewId" required type="text" name="viewId">
+            <input placeholder="visibility" required class="default" type="radio" value="visible" name="visibility"> Visible
+            <input placeholder="visibility" required type="radio" value="hidden" name="visibility"> Hidden
+            <button>Set</button>
+          </form>
+          <hr/>
+          <h2>Reorder</h2>
+          <h3>Row</h3>
+          <form id="row-move-form">
+            <input id="row-move-form-row-id-input" placeholder="rowId" required type="text" name="rowId">
+            <input id="row-move-form-row-new-index-input" placeholder="newIndex" required type="number" name="newIndex">
+            <button>Move</button>
+          </form>
+          <h3>Column (in a row)</h3>
+          <form id="column-move-form">
+            <input id="column-move-form-column-id-input" placeholder="columnId" required type="text" name="columnId">
+            <input id="column-move-form-column-new-index-input" placeholder="newIndex" required type="number" name="newIndex">
+            <button>Move</button>
+          </form>
+          <h3>View (in a column)</h3>
+          <form id="view-move-form">
+            <input id="view-move-form-view-id-input" placeholder="viewId" required type="text" name="viewId">
+            <input id="view-move-form-view-new-index-input" placeholder="newIndex" required type="number" name="newIndex">
+            <button>Move</button>
+          </form>
+        </div>
       </section>
       <section id="main-area">
         <section id="app-area">

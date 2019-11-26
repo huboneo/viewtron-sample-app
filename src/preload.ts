@@ -7,7 +7,6 @@ import {
     columnResetHandler,
     columnResizeHandler,
     columnVisibilityHandler,
-    viewtronInitHandler,
     removeColumnHandler,
     removeRowHandler,
     removeViewHandler,
@@ -18,10 +17,11 @@ import {
     rowResizeHandler,
     rowVisibilityHandler,
     viewResetHandler,
+    viewResizeHandler,
+    viewtronInitHandler,
     viewtronResizeHandler,
     viewtronUpdateHandler,
-    viewResizeHandler,
-    viewVisibilityHandler
+    viewVisibilityHandler,
 } from "viewtron/dist/ipc-renderer";
 
 // All of the Node.js APIs are available in the preload process.
@@ -56,16 +56,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("sidebar-list").innerHTML = `
             ${rows.map(({id}) => {
-                const rowColumns = columns.filter(({rowId}) => rowId === id);
+            const rowColumns = columns.filter(({rowId}) => rowId === id);
 
-                return `
+            return `
                     <li>
                         Row (<span class="value">${id}</span>) <button data-row-id="${id}">-</button>
                         <ul>
                             ${rowColumns.map((column) => {
-                                const colViews = views.filter((view) => view.columnId === column.id);
+                const colViews = views.filter((view) => view.columnId === column.id);
 
-                                return `
+                return `
                                     <li>
                                         Column (<span class="value">${column.id}</span>) <button data-column-id="${column.id}">-</button>
                                         <ul>
@@ -75,11 +75,11 @@ window.addEventListener("DOMContentLoaded", () => {
                                         </ul>
                                     </li>
                                 `;
-                            }).join("")}
+            }).join("")}
                         </ul>
                     </li>
                 `;
-            }).join("")}
+        }).join("")}
         `;
     });
 
