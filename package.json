@@ -20,7 +20,7 @@
   "author": "huboneo",
   "license": "MIT",
   "devDependencies": {
-    "electron": "6.0.8",
+    "electron": "15.5.5",
     "tslint": "5.19.0",
     "typescript": "3.7.2",
     "viewtron": "2.4.1"
